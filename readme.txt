@@ -4,7 +4,7 @@ Donate link: http://paypal.me/aslamdoctor
 Tags: woocommerce, ecommerce, product, attribute, attributes, search
 Requires at least: 4.3
 Tested up to: 5.9
-Stable tag: 4.0.1
+Stable tag: 1.2.0
 Requires PHP: 7.0.0
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
