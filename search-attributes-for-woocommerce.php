@@ -9,7 +9,7 @@
  * Author URI: https://aslamdoctor.com/
  * Developer: Aslam Doctor
  * Developer URI: https://aslamdoctor.com/
- * Text Domain:  rwpp
+ * Text Domain:  wsatt
  *
  * WC requires at least: 4.3
  * WC tested up to: 6.3.1
