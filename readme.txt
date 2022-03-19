@@ -51,7 +51,9 @@ Yes. if you disable or delete the plugin, the changes you made will be undone. A
 == ChangeLog ==
 
 = Version 1.2.0 =
-*** need to add details here ***
+* Secutiry fixes
+* Refactoring of the code
+* Updated the code to follow WPVIP coding standards
 
 = Version 1.0.0 =
 
