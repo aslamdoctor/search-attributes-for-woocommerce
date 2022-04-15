@@ -13,4 +13,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<h1><?php esc_html_e( 'Search Attributes for WooCommerce', 'wsatt' ); ?></h1>
 
-	<p><?php esc_html_e( 'After you Enable this plugin, the product search form on your website will also look into selected "Product Attribute Names".' ); ?></p>
+	<p><?php esc_html_e( 'After you Enable this plugin, the product search form on your website will also look into selected "Product Attribute Names".', 'wsatt' ); ?></p>

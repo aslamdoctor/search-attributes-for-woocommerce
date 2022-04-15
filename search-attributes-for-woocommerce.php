@@ -3,13 +3,14 @@
  * Plugin Name: Search Attributes for WooCommerce
  * Plugin URI: https://wordpress.org/plugins/search-attributes-for-woocommerce/
  * Description: This plugin allows you to extend WordPress search feature by searching into Woocommerce product attributes
- * Version: 1.2.0
- * Requires at least: 4.3
+ * Version: 1.3.0
  * Author: Aslam Doctor
  * Author URI: https://aslamdoctor.com/
  * Developer: Aslam Doctor
  * Developer URI: https://aslamdoctor.com/
  * Text Domain:  wsatt
+ * Domain Path: /languages
+ * Requires at least: 4.6
  *
  * WC requires at least: 4.3
  * WC tested up to: 6.3.1
@@ -47,7 +48,8 @@ add_action( 'admin_init', 'wsatt_check_required_plugin' );
  * Show plugin activation notice
  */
 function wsatt_plugin_notice() {
-	_e( '<div class="error"><p>Please activate Woocommerce plugin before using <strong>Search Attributes for WooCommerce</strong> plugin.</p></div>', 'wsatt' ); // phpcs:ignore
+	?><div class="error"><p><?php echo esc_html_e( 'Please activate Woocommerce plugin before using', 'wsatt' ); ?> <strong><?php echo esc_html_e( 'Search Attributes for WooCommerce', 'wsatt' ); ?></strong> <?php echo esc_html_e( 'plugin.', 'wsatt' ); ?></p></div>
+	<?php
 }
 
 /**
@@ -93,7 +95,7 @@ function wsatt_add_pages( $role ) {
  */
 function wsatt_plugin_settings_link( $links ) {
 	$settings_link = admin_url( 'admin.php?page=wsatt-page' );
-	array_unshift( $links, '<a href="' . esc_url( $settings_link ) . '">Settings</a>' );
+	array_unshift( $links, '<a href="' . esc_url( $settings_link ) . '">' . __( 'Settings', 'wsatt' ) . '</a>' );
 	return $links;
 }
 $wsatt_plugin = plugin_basename( __FILE__ );

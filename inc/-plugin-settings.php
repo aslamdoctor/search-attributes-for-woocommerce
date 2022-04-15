@@ -79,7 +79,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php if ( isset( $_GET['settings-updated'] ) ) : // phpcs:ignore ?>
 		<div class="notice notice-success is-dismissible">
-		<p><strong><?php esc_html_e( 'Changes have been save.' ); ?></strong></p>
+		<p><strong><?php esc_html_e( 'Changes have been save.', 'wsatt' ); ?></strong></p>
 		</div>
 	<?php endif; ?>
 

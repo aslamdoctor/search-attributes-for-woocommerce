@@ -2,9 +2,9 @@
 Contributors: aslamdoctor
 Donate link: http://paypal.me/aslamdoctor
 Tags: woocommerce, ecommerce, product, attribute, attributes, search
-Requires at least: 4.3
-Tested up to: 5.9
-Stable tag: 1.2.0
+Requires at least: 4.6
+Tested up to: 5.9.3
+Stable tag: 1.3.0
 Requires PHP: 7.0.0
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -49,6 +49,9 @@ Yes. if you disable or delete the plugin, the changes you made will be undone. A
 3. Search result for color "red" after activating plugin
 
 == ChangeLog ==
+
+= Version 1.3.0 =
+* added global translation support
 
 = Version 1.2.0 =
 
