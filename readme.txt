@@ -4,7 +4,7 @@ Donate link: http://paypal.me/aslamdoctor
 Tags: woocommerce, ecommerce, product, attribute, attributes, search
 Requires at least: 4.6
 Tested up to: 5.9.3
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 Requires PHP: 7.0.0
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -13,7 +13,7 @@ This plugin allows you to extend wordpress search feature by searching into Wooc
 
 == Description ==
 
-Search Attributes for WooCommerce is a plugin that enables Product search form to look into Product Attribute Names.
+Search Attributes for WooCommerce is a WordPress Plugin that enables Product search form to look into Product Attribute Names.
 E.g. as show in plugin screenshots, you can search products using color name. 
 Another useful example is, you can search products using Brand name if you have Brands assigned as attributes.
 
@@ -42,6 +42,12 @@ To use this plugin, please make sure that Woocommerce is installed and Activated
 
 Yes. if you disable or delete the plugin, the changes you made will be undone. Also if you change the Status in plugin settings to "Disabled", it will not search for attributes.
 
+
+== Contribute ==
+
+If you want to fix a bug in the plugin or add new features, feel free to fork this [github repo](https://github.com/aslamdoctor/search-attributes-for-woocommerce) and follow the `CONTRIBUTING.md` file in the github repo for guidelines.
+
+
 == Screenshots ==
 
 1. Search result for color "red" before activating plugin
@@ -49,6 +55,11 @@ Yes. if you disable or delete the plugin, the changes you made will be undone. A
 3. Search result for color "red" after activating plugin
 
 == ChangeLog ==
+
+= Version 1.3.1 =
+* tested with wordpress version 5.9.3
+* tested with woocommerce version 6.4.1
+* added notes for developers for contributing to plugin
 
 = Version 1.3.0 =
 * added global translation support

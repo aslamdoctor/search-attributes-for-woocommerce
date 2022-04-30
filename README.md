@@ -1,6 +1,6 @@
 # Search Attributes for WooCommerce
 
-Search Attributes for WooCommerce is a plugin that enables Product search form to look into Product Attribute Names.
+Search Attributes for WooCommerce is a WordPress Plugin that enables Product search form to look into Product Attribute Names.
 
 E.g. as show in plugin screenshots, you can search products using color name.
 
@@ -28,3 +28,7 @@ Enable plugin for "Color" attribute
 
 ![Search result for color "red" after activating plugin](screenshots/screenshot-3.png 'Search result for color "red" after activating plugin')
 Search result for color "red" after activating plugin
+
+## Contribute
+
+If you want to fix a bug in the plugin or add new features, feel free to fork this repo and follow the `CONTRIBUTING.md` file for guidelines.
