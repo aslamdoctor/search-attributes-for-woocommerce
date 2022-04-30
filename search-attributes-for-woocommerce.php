@@ -4,7 +4,7 @@
  * Plugin Name: Search Attributes for WooCommerce
  * Plugin URI: https://wordpress.org/plugins/search-attributes-for-woocommerce/
  * Description: This WordPress plugin allows you to extend WordPress search feature by searching into Woocommerce product attributes
- * Version: 1.3.1
+ * Version: 1.3.2
  * Author: Aslam Doctor
  * Author URI: https://aslamdoctor.com/
  * Developer: Aslam Doctor
@@ -131,7 +131,7 @@ function wsatt_enqueue($hook)
     }
 
     // Stylesheets.
-    wp_register_style('wsatt_app_css', ( plugin_dir_url(__FILE__) . '/css/app.css' ), false, '1.3.1');
+    wp_register_style('wsatt_app_css', ( plugin_dir_url(__FILE__) . '/css/app.css' ), false, '1.3.2');
     wp_enqueue_style('wsatt_app_css');
 }
 add_action('admin_enqueue_scripts', 'wsatt_enqueue');

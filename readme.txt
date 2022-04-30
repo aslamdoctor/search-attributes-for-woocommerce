@@ -4,7 +4,7 @@ Donate link: http://paypal.me/aslamdoctor
 Tags: woocommerce, ecommerce, product, attribute, attributes, search
 Requires at least: 4.6
 Tested up to: 5.9.3
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 Requires PHP: 7.0.0
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -56,7 +56,7 @@ If you want to fix a bug in the plugin or add new features, feel free to fork th
 
 == ChangeLog ==
 
-= Version 1.3.1 =
+= Version 1.3.2 =
 * tested with wordpress version 5.9.3
 * tested with woocommerce version 6.4.1
 * added notes for developers for contributing to plugin
