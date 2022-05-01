@@ -16,17 +16,17 @@ To use this plugin, please make sure that Woocommerce is installed and Activated
 
 ## Screenshots
 
-![Search result for color "red" before activating plugin](screenshots/screenshot-1.png 'Search result for color "red" before activating plugin')
+![Search result for color "red" before activating plugin](assets/screenshot-1.png 'Search result for color "red" before activating plugin')
 Search result for color "red" before activating plugin
 
 ---
 
-![Enable plugin for "Color" attribute](screenshots/screenshot-2.png 'Enable plugin for "Color" attribute')
+![Enable plugin for "Color" attribute](assets/screenshot-2.png 'Enable plugin for "Color" attribute')
 Enable plugin for "Color" attribute
 
 ---
 
-![Search result for color "red" after activating plugin](screenshots/screenshot-3.png 'Search result for color "red" after activating plugin')
+![Search result for color "red" after activating plugin](assets/screenshot-3.png 'Search result for color "red" after activating plugin')
 Search result for color "red" after activating plugin
 
 ## Contribute
