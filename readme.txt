@@ -3,9 +3,9 @@ Contributors: aslamdoctor
 Donate link: http://paypal.me/aslamdoctor
 Tags: woocommerce, ecommerce, product, attribute, attributes, search
 Requires at least: 4.6
-Tested up to: 6.1.1
-Stable tag: 1.3.3
-Requires PHP: 7.0.0
+Tested up to: 6.4
+Stable tag: 1.3.4
+Requires PHP: 7.4.0
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -55,6 +55,11 @@ If you want to fix a bug in the plugin or add new features, feel free to fork th
 3. Search result for color "red" after activating plugin
 
 == ChangeLog ==
+
+= Version 1.3.4 =
+* Make plugin compatible with HPOS ( High-Performance Order Storage )
+* tested with wordpress version 6.4.0
+* tested with woocommerce version 8.4.0
 
 = Version 1.3.3 =
 * tested with wordpress version 6.1.1
