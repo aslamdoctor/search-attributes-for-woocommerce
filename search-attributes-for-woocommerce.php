@@ -4,17 +4,17 @@
  * Plugin Name: Search Attributes for WooCommerce
  * Plugin URI: https://wordpress.org/plugins/search-attributes-for-woocommerce/
  * Description: This WordPress plugin allows you to extend WordPress search feature by searching into Woocommerce product attributes
- * Version: 1.3.4
+ * Version: 1.3.5
  * Author: Aslam Doctor
  * Author URI: https://aslamdoctor.com/
  * Developer: Aslam Doctor
  * Developer URI: https://aslamdoctor.com/
  * Text Domain:  wsatt
  * Domain Path: /languages
- * Requires at least: 4.6
+ * Requires at least: 6.6
  *
  * WC requires at least: 4.3
- * WC tested up to: 8.4.0
+ * WC tested up to: 9.5.2
  *
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -163,12 +163,12 @@ if ( isset( $wsatt_status ) && ! empty( $wsatt_status ) ) {
 		$wsatt_attributes = get_option( 'wsatt_attributes' );
 		if ( isset( $wsatt_attributes ) && is_array( $wsatt_attributes ) && count( $wsatt_attributes ) > 0 ) {
 			foreach ( $wsatt_attributes as $attribute ) {
-				$where .= " OR $wpdb->posts.ID IN (SELECT $wpdb->posts.ID 
+				$where .= " OR $wpdb->posts.ID IN (SELECT $wpdb->posts.ID
 				FROM $wpdb->posts
 				LEFT JOIN $wpdb->term_relationships ON($wpdb->posts.ID = $wpdb->term_relationships.object_id)
 				LEFT JOIN $wpdb->term_taxonomy ON($wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id)
 				LEFT JOIN $wpdb->terms ON($wpdb->term_taxonomy.term_id = $wpdb->terms.term_id)
-				WHERE $wpdb->posts.post_type = 'product' 
+				WHERE $wpdb->posts.post_type = 'product'
 				AND $wpdb->posts.post_status = 'publish'
 				AND $wpdb->term_taxonomy.taxonomy = '" . esc_sql( $attribute ) . "'
 				AND $wpdb->terms.name LIKE '%" . get_search_query() . "%')";
