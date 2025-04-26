@@ -1,7 +1,7 @@
 === Search Attributes for WooCommerce ===
 Contributors: aslamdoctor
 Donate link: https://github.com/sponsors/aslamdoctor
-Tags: woocommerce, ecommerce, product, attribute, attributes, search
+Tags: woocommerce, ecommerce, product, attribute, search
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4.0
