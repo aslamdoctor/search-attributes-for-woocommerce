@@ -4,7 +4,7 @@
  * Plugin Name: Search Attributes for WooCommerce
  * Plugin URI: https://wordpress.org/plugins/search-attributes-for-woocommerce/
  * Description: This WordPress plugin allows you to extend WordPress search feature by searching into Woocommerce product attributes
- * Version: 1.3.5
+ * Version: 1.3.6
  * Author: Aslam Doctor
  * Author URI: https://aslamdoctor.com/
  * Developer: Aslam Doctor
@@ -14,7 +14,7 @@
  * Requires at least: 6.6
  *
  * WC requires at least: 4.3
- * WC tested up to: 9.5.2
+ * WC tested up to: 9.8.2
  *
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -48,7 +48,8 @@ add_action( 'admin_init', 'wsatt_check_required_plugin' );
 /**
  * Show plugin activation notice
  */
-function wsatt_plugin_notice() {    ?><div class="error"><p><?php echo esc_html_e( 'Please activate Woocommerce plugin before using', 'wsatt' ); ?> <strong><?php echo esc_html_e( 'Search Attributes for WooCommerce', 'wsatt' ); ?></strong> <?php echo esc_html_e( 'plugin.', 'wsatt' ); ?></p></div>
+function wsatt_plugin_notice() {
+	?><div class="error"><p><?php echo esc_html_e( 'Please activate Woocommerce plugin before using', 'wsatt' ); ?> <strong><?php echo esc_html_e( 'Search Attributes for WooCommerce', 'wsatt' ); ?></strong> <?php echo esc_html_e( 'plugin.', 'wsatt' ); ?></p></div>
 	<?php
 }
 
@@ -189,3 +190,18 @@ function wsatt_declare_hpos_compatibility() {
 	}
 }
 add_action( 'before_woocommerce_init', 'wsatt_declare_hpos_compatibility' );
+
+
+/**
+ * Add sponsor link to plugin listing page.
+ *
+ * @param [Array]  $links All links related to specific plugin under Admin>Plugins section.
+ * @param [String] $file The plugin file path.
+ */
+function wsatt_sponsor_link( $links, $file ) {
+	if ( $file === plugin_basename( __FILE__ ) ) {
+		$links[] = '<a href="https://github.com/sponsors/aslamdoctor"><span class="dashicons dashicons-star-filled" aria-hidden="true" style="font-size:14px;line-height:1.3"></span>' . __( 'Sponsor', 'wsatt' ) . '</a>';
+	}
+	return $links;
+}
+add_filter( 'plugin_row_meta', 'wsatt_sponsor_link', 10, 2 );

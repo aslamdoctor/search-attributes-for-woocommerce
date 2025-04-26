@@ -1,34 +1,46 @@
 # Search Attributes for WooCommerce
 
-Search Attributes for WooCommerce is a WordPress Plugin that enables Product search form to look into Product Attribute Names.
+## Development Setup
 
-E.g. as show in plugin screenshots, you can search products using color name.
+### Prerequisites
+- WordPress with WooCommerce installed
 
-Another useful example is, you can search products using Brand name if you have Brands assigned as attributes.
+## Steps to deploy the plugin
 
-To use this plugin, please make sure that Woocommerce is installed and Activated.
+Update version number in:
+* Main plugin file header
+* readme.txt
+* Any constants in your code
 
-## Important Notes
+Update changelog in `readme.txt`
 
-1. The plugin may not effect in case you are using some other product search related plugin for woocommerce.
+**Commit changes:**
 
-2. Choose your attributes carefully, because the more attributes you choose, the more it will effect on the search speed.
+```bash
+git add .
+git commit -m "Prepare release v1.2.3"
+```
 
-## Screenshots
+Also do git push so that the main repo will be up to date. **This will not run the deploy workflow, so don’t worry**
 
-![Search result for color "red" before activating plugin](assets/screenshot-1.png 'Search result for color "red" before activating plugin')
-Search result for color "red" before activating plugin
+```bash
+git push
+```
 
----
+## To manually run the deploy
 
-![Enable plugin for "Color" attribute](assets/screenshot-2.png 'Enable plugin for "Color" attribute')
-Enable plugin for "Color" attribute
+If the re-run option doesn't work, you can delete and re-push the same tag:
 
----
+```bash
+# Delete the tag locally
+git tag -d 1.2.3  # Replace with your current tag
 
-![Search result for color "red" after activating plugin](assets/screenshot-3.png 'Search result for color "red" after activating plugin')
-Search result for color "red" after activating plugin
+# Delete the tag on GitHub
+git push origin :refs/tags/1.2.3  # Replace with your current tag
 
-## Contribute
+# Create the tag again
+git tag 1.2.3  # Replace with your current tag
 
-If you want to fix a bug in the plugin or add new features, feel free to fork this repo and follow the `CONTRIBUTING.md` file for guidelines.
+# Push the tag again
+git push origin 1.2.3  # Replace with your current tag
+```

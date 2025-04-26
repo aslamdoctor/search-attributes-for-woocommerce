@@ -3,9 +3,9 @@ Contributors: aslamdoctor
 Donate link: https://github.com/sponsors/aslamdoctor
 Tags: woocommerce, ecommerce, product, attribute, attributes, search
 Requires at least: 6.6
-Tested up to: 6.7.1
+Tested up to: 6.8
 Requires PHP: 7.4.0
-Stable tag: /trunk/
+Stable Tag: 1.3.6
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -55,6 +55,10 @@ If you want to fix a bug in the plugin or add new features, feel free to fork th
 3. Search result for color "red" after activating plugin
 
 == ChangeLog ==
+
+= Version 1.3.6 =
+* tested with wordpress version 6.8
+* tested with woocommerce version 9.8.2
 
 = Version 1.3.5 =
 * tested with wordpress version 6.7.1
