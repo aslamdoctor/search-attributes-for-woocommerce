@@ -4,7 +4,7 @@
  * Plugin Name: Search Attributes for WooCommerce
  * Plugin URI: https://wordpress.org/plugins/search-attributes-for-woocommerce/
  * Description: This WordPress plugin allows you to extend WordPress search feature by searching into Woocommerce product attributes
- * Version: 1.3.6
+ * Version: 1.3.7
  * Author: Aslam Doctor
  * Author URI: https://aslamdoctor.com/
  * Developer: Aslam Doctor
@@ -14,16 +14,20 @@
  * Requires at least: 6.6
  *
  * WC requires at least: 4.3
- * WC tested up to: 9.8.2
+ * WC tested up to: 11.2.1
  *
- * License: GNU General Public License v3.0
- * License URI: http://www.gnu.org/licenses/gpl-3.0.html
+ * License: GPLv3 or later
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @package wsatt
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
+}
+
+if ( ! defined( 'WSATT_VERSION' ) ) {
+	define( 'WSATT_VERSION', '1.3.7' );
 }
 
 /**
@@ -39,17 +43,47 @@ function wsatt_check_required_plugin() {
 			unset( $_GET['activate'] ); // phpcs:ignore WordPress.Security.NonceVerification
 		}
 	}
-	register_setting( 'wsatt-settings-group', 'wsatt_status' );
-	register_setting( 'wsatt-settings-group', 'wsatt_attributes' );
+	register_setting(
+		'wsatt-settings-group',
+		'wsatt_status',
+		array(
+			'type'              => 'integer',
+			'sanitize_callback' => 'absint',
+			'default'           => 0,
+		)
+	);
+	register_setting(
+		'wsatt-settings-group',
+		'wsatt_attributes',
+		array(
+			'type'              => 'array',
+			'sanitize_callback' => 'wsatt_sanitize_attributes',
+			'default'           => array(),
+		)
+	);
 }
 
 add_action( 'admin_init', 'wsatt_check_required_plugin' );
 
 /**
+ * Sanitize attributes array.
+ *
+ * @param array|mixed $attributes Attribute list from form.
+ * @return array
+ */
+function wsatt_sanitize_attributes( $attributes ) {
+	if ( ! is_array( $attributes ) ) {
+		return array();
+	}
+	return array_values( array_map( 'sanitize_text_field', $attributes ) );
+}
+
+/**
  * Show plugin activation notice
  */
 function wsatt_plugin_notice() {
-	?><div class="error"><p><?php echo esc_html_e( 'Please activate Woocommerce plugin before using', 'wsatt' ); ?> <strong><?php echo esc_html_e( 'Search Attributes for WooCommerce', 'wsatt' ); ?></strong> <?php echo esc_html_e( 'plugin.', 'wsatt' ); ?></p></div>
+	?>
+	<div class="error"><p><?php esc_html_e( 'Please activate Woocommerce plugin before using', 'wsatt' ); ?> <strong><?php esc_html_e( 'Search Attributes for WooCommerce', 'wsatt' ); ?></strong> <?php esc_html_e( 'plugin.', 'wsatt' ); ?></p></div>
 	<?php
 }
 
@@ -124,7 +158,7 @@ function wsatt_enqueue( $hook ) {
 	}
 
 	// Stylesheets.
-	wp_register_style( 'wsatt_app_css', ( plugin_dir_url( __FILE__ ) . '/css/app.css' ), false, '1.3.2' );
+	wp_register_style( 'wsatt_app_css', ( plugin_dir_url( __FILE__ ) . '/css/app.css' ), false, WSATT_VERSION );
 	wp_enqueue_style( 'wsatt_app_css' );
 }
 add_action( 'admin_enqueue_scripts', 'wsatt_enqueue' );
@@ -138,7 +172,7 @@ if ( isset( $wsatt_status ) && ! empty( $wsatt_status ) ) {
 	/**
 	 * Apply search filters
 	 *
-	 * @param [Object] $query Global wp_query to modify.
+	 * @param WP_Query $query Global wp_query to modify.
 	 */
 	function wsatt_search_filter( $query ) {
 		if ( is_admin() ) {
@@ -156,23 +190,43 @@ if ( isset( $wsatt_status ) && ! empty( $wsatt_status ) ) {
 	/**
 	 * Modify sql query for wp_query
 	 *
-	 * @param [String] $where Where condition for SQL query.
+	 * @param string $where Where condition for SQL query.
 	 */
 	function wsatt_brands_where( $where = '' ) {
 		global $wpdb;
 
+		// Remove filter to prevent modifying subsequent queries in the same request.
+		remove_filter( 'posts_where', 'wsatt_brands_where' );
+
 		$wsatt_attributes = get_option( 'wsatt_attributes' );
 		if ( isset( $wsatt_attributes ) && is_array( $wsatt_attributes ) && count( $wsatt_attributes ) > 0 ) {
-			foreach ( $wsatt_attributes as $attribute ) {
-				$where .= " OR $wpdb->posts.ID IN (SELECT $wpdb->posts.ID
-				FROM $wpdb->posts
-				LEFT JOIN $wpdb->term_relationships ON($wpdb->posts.ID = $wpdb->term_relationships.object_id)
-				LEFT JOIN $wpdb->term_taxonomy ON($wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id)
-				LEFT JOIN $wpdb->terms ON($wpdb->term_taxonomy.term_id = $wpdb->terms.term_id)
-				WHERE $wpdb->posts.post_type = 'product'
-				AND $wpdb->posts.post_status = 'publish'
-				AND $wpdb->term_taxonomy.taxonomy = '" . esc_sql( $attribute ) . "'
-				AND $wpdb->terms.name LIKE '%" . get_search_query() . "%')";
+			$search_term = trim( get_search_query() );
+			if ( '' !== $search_term ) {
+				$taxonomies   = array_values( array_map( 'sanitize_text_field', $wsatt_attributes ) );
+				$placeholders = implode( ', ', array_fill( 0, count( $taxonomies ), '%s' ) );
+				$like         = '%' . $wpdb->esc_like( $search_term ) . '%';
+
+				$query_params = array_merge( $taxonomies, array( $like ) );
+				// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $placeholders contains safe generated %s placeholders.
+				$sql          = $wpdb->prepare(
+					" OR $wpdb->posts.ID IN (
+						SELECT $wpdb->posts.ID
+						FROM $wpdb->posts
+						LEFT JOIN $wpdb->term_relationships ON ( $wpdb->posts.ID = $wpdb->term_relationships.object_id )
+						LEFT JOIN $wpdb->term_taxonomy ON ( $wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id )
+						LEFT JOIN $wpdb->terms ON ( $wpdb->term_taxonomy.term_id = $wpdb->terms.term_id )
+						WHERE $wpdb->posts.post_type = 'product'
+						AND $wpdb->posts.post_status = 'publish'
+						AND $wpdb->term_taxonomy.taxonomy IN ($placeholders)
+						AND $wpdb->terms.name LIKE %s
+					)",
+					$query_params
+				);
+				// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+
+				if ( $sql ) {
+					$where .= $sql;
+				}
 			}
 		}
 

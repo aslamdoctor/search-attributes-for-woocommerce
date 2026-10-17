@@ -3,11 +3,11 @@ Contributors: aslamdoctor
 Donate link: https://github.com/sponsors/aslamdoctor
 Tags: woocommerce, ecommerce, product, attribute, search
 Requires at least: 6.6
-Tested up to: 6.8
+Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable Tag: 1.3.6
-License: GPLv3 or later License
-URI: http://www.gnu.org/licenses/gpl-3.0.html
+Stable Tag: 1.3.7
+License: GPLv3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 This plugin allows you to extend wordpress search feature by searching into Woocommerce product attributes.
 
@@ -55,6 +55,15 @@ If you want to fix a bug in the plugin or add new features, feel free to fork th
 3. Search result for color "red" after activating plugin
 
 == ChangeLog ==
+
+= Version 1.3.7 =
+* Tested with WordPress version 7.1
+* Tested with WooCommerce version 11.2.1
+* Consolidated product attribute search into a single prepared SQL query
+* Added sanitize callbacks for plugin settings
+* Fixed admin notice echo syntax
+* Added option cleanup on plugin uninstall
+* Updated core attribute taxonomy retrieval to use wc_get_attribute_taxonomies
 
 = Version 1.3.6 =
 * tested with wordpress version 6.8
